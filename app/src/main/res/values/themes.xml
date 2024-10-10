@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Mvplearn" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="fontFamily">@font/iran_sans</item>
+
+        <item name="android:statusBarColor">@color/main</item>
+        <item name="android:navigationBarColor">@color/white_back</item>
+
+        <item name="colorPrimary">@color/black</item>
+
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+
+    </style>
+
+    <style name="Theme.Mvplearn" parent="Base.Theme.Mvplearn" />
+
+    <!-- style for splash screen -->
+    <style name="fullScreen" parent="Base.Theme.Mvplearn">
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <!-- style for TabLayout -->
+    <style name="CustomTabLayout" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
