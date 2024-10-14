@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import com.google.android.material.tabs.TabLayoutMediator
 import ir.younesmohammadi.mvp_learn.adapter.tabLayout.TabLayoutAdapter
+import ir.younesmohammadi.mvp_learn.androidWrapper.ColorImportance
 import ir.younesmohammadi.mvp_learn.androidWrapper.DialogUtils
 import ir.younesmohammadi.mvp_learn.androidWrapper.PersianDate
 import ir.younesmohammadi.mvp_learn.androidWrapper.SnackBarUtils
@@ -34,21 +35,30 @@ class ViewMainActivity(
 
             DialogUtils.show(context, view.root, false)
 
-            view.txtTitle.text = "عنوان وظیفه"
-            view.btnSave.text = "ثبت"
-
             view.btnCancel.setOnClickListener { DialogUtils.dismiss() }
 
             view.btnSave.setOnClickListener {
                 val task = view.edtTask.text.toString().trim()
                 val viewError = view.layoutTask
-                if (task.isNotBlank()) {
+
+                // Prioritization Task
+                val selectedPriority = when (view.radioGroup.checkedRadioButtonId) {
+                    view.radioLow.id -> ColorImportance.Low
+                    view.radioMedium.id -> ColorImportance.Normal
+                    view.radioHigh.id -> ColorImportance.High
+                    else -> ColorImportance.Low
+                }
+
+
+                // save data
+                if (task.isNotBlank() && selectedPriority.isNotEmpty()) {
                     onBinData.saveData(
                         TaskEntity(
                             id = 0,
                             title = task,
                             state = false,
-                            PersianDate.getDate()
+                            date = PersianDate.getDate(),
+                            importance = selectedPriority
                         )
                     )
                     SnackBarUtils.show(binding.root, "وظیفه با موفقیت ذخیره شد.")

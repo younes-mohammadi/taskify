@@ -3,4 +3,9 @@
     <string name="todo">TODO</string>
     <string name="cancel">انصراف</string>
     <string name="enter_task">وظیفه را وارد کنید</string>
+    <string name="title_task">عنوان وظیفه</string>
+    <string name="save">ثبت</string>
+    <string name="low">کم اهمیت</string>
+    <string name="normal">معمولی</string>
+    <string name="high">خیلی مهم</string>
 </resources>

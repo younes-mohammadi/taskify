@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/back_edit_text"
@@ -12,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:text="@string/title_task"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -24,11 +26,11 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layoutDirection="rtl"
         android:hint="@string/enter_task"
+        android:layoutDirection="rtl"
         android:textColorHint="@color/Neutral_500"
-        app:boxStrokeWidthFocused="0dp"
         app:boxStrokeErrorColor="@color/Transparent"
+        app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_title">
@@ -41,11 +43,56 @@
             android:gravity="start"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:textSize="18sp"
             android:minLines="2"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:layoutDirection="rtl"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_task">
+
+        <RadioButton
+            android:id="@+id/radio_low"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/main"
+            android:checked="true"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@string/low"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/main"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@string/normal"
+            android:textColor="@color/black" />
+
+        <RadioButton
+            android:id="@+id/radio_high"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/main"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="@string/high"
+            android:textColor="@color/black" />
+
+    </RadioGroup>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
@@ -56,6 +103,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/back_buttom"
         android:backgroundTint="@color/main"
+        android:text="@string/save"
         android:textColor="@color/white_back"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -63,7 +111,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_task" />
+        app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cancel"

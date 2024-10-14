@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.younesmohammadi.mvp_learn.adapter.recycler.RecyclerTaskAdapter
+import ir.younesmohammadi.mvp_learn.androidWrapper.ColorImportance
 import ir.younesmohammadi.mvp_learn.androidWrapper.DialogUtils
 import ir.younesmohammadi.mvp_learn.androidWrapper.PersianDate
 import ir.younesmohammadi.mvp_learn.androidWrapper.SnackBarUtils
@@ -73,6 +74,12 @@ class ViewTaskFragment(
         view.btnSave.text = "ویرایش"
         view.layoutTask.hint = "وظیفه:"
 
+        when (taskEntity.importance) {
+            ColorImportance.Low -> view.radioLow.isChecked = true
+            ColorImportance.Normal -> view.radioMedium.isChecked = true
+            ColorImportance.High -> view.radioHigh.isChecked = true
+        }
+
         val edit = Editable.Factory()
         view.edtTask.text = edit.newEditable(taskEntity.title)
 
@@ -81,14 +88,25 @@ class ViewTaskFragment(
         view.btnSave.setOnClickListener {
             val task = view.edtTask.text.toString().trim()
             val viewError = view.layoutTask
-            if (task.isNotBlank()) {
+
+            // Prioritization Task
+            val selectedPriority = when (view.radioGroup.checkedRadioButtonId) {
+                view.radioLow.id -> ColorImportance.Low
+                view.radioMedium.id -> ColorImportance.Normal
+                view.radioHigh.id -> ColorImportance.High
+                else -> ColorImportance.Low
+            }
+
+            // save data
+            if (task.isNotBlank() && selectedPriority.isNotEmpty()) {
 
                 onBinData.editData(
                     TaskEntity(
                         id = taskEntity.id,
                         title = task,
                         state = taskEntity.state,
-                        PersianDate.getDate()
+                        date = PersianDate.getDate(),
+                        importance = selectedPriority
                     )
                 )
 
@@ -108,6 +126,8 @@ class ViewTaskFragment(
 
     }
 
-    fun editTask(onBinData: OnBinData) {}
+    fun editTask(onBinData: OnBinData): OnBinData {
+        return onBinData
+    }
 
 }

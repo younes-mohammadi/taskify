@@ -1,10 +1,12 @@
 package ir.younesmohammadi.mvp_learn.adapter.recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ir.younesmohammadi.mvp_learn.adapter.recycler.utils.RecyclerDiffUtils
+import ir.younesmohammadi.mvp_learn.androidWrapper.ColorImportance
 import ir.younesmohammadi.mvp_learn.androidWrapper.PersianDate
 import ir.younesmohammadi.mvp_learn.androidWrapper.Utils
 import ir.younesmohammadi.mvp_learn.databinding.RecyclerItemBinding
@@ -41,12 +43,24 @@ class RecyclerTaskAdapter(
             binding.txtTitle.text = data.title
             binding.checkbox.isChecked = data.state
             binding.txtDate.text = data.date
+            binding.txtImportance.text = data.importance
+
+            when (data.importance) {
+                ColorImportance.Low -> binding.cardImportance.setCardBackgroundColor(Color.parseColor("#D3D3D3"))
+                ColorImportance.Normal -> binding.cardImportance.setCardBackgroundColor(Color.parseColor("#FF9800"))
+                ColorImportance.High -> binding.cardImportance.setCardBackgroundColor(Color.parseColor("#FF5252"))
+            }
+
+
             binding.checkbox.setOnClickListener {
                 if (data.state) {
                     onBinData.editData(
                         TaskEntity(
-                            id = data.id, title = data.title, state = false,
-                            PersianDate.getDate()
+                            id = data.id,
+                            title = data.title,
+                            state = false,
+                            date = PersianDate.getDate(),
+                            importance = data.importance
                         )
                     )
                 } else {
@@ -55,7 +69,8 @@ class RecyclerTaskAdapter(
                             id = data.id,
                             title = data.title,
                             state = true,
-                            PersianDate.getDate()
+                            date = PersianDate.getDate(),
+                            importance = data.importance
                         )
                     )
                 }
@@ -66,12 +81,13 @@ class RecyclerTaskAdapter(
                         id = data.id,
                         title = data.title,
                         state = data.state,
-                        date = data.date
+                        date = data.date,
+                        importance = data.importance
                     )
                 )
             }
             binding.imgEdit.setOnClickListener {
-                utils.dialogEditTask(data , onBinData)
+                utils.dialogEditTask(data, onBinData)
             }
 
         }
