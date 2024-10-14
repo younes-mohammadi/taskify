@@ -11,7 +11,7 @@ interface TaskDAO {
     @Insert
     fun insertTask(task: TaskEntity)
 
-    @Query("SELECT * FROM ${DBHandler.TASK_TABLE} WHERE state = :type")
+    @Query("SELECT * FROM ${DBHandler.TASK_TABLE} WHERE state = :type ORDER BY id DESC")
     fun getTasksByColumn(type: Boolean): Flow<List<TaskEntity>>
 
     @Update

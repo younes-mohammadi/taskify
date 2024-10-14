@@ -130,4 +130,8 @@ class ViewTaskFragment(
         return onBinData
     }
 
+    override fun scrollRecycler() {
+        binding.recyclerTasks.scrollToPosition(0)
+    }
+
 }

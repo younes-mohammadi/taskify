@@ -104,6 +104,8 @@ class RecyclerTaskAdapter(
 
         diffResult.dispatchUpdatesTo(this)
 
+        utils.scrollRecycler()
+
     }
 
 }

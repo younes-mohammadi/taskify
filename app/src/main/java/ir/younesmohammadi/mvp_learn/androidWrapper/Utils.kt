@@ -7,4 +7,6 @@ interface Utils {
 
     fun dialogEditTask(taskEntity: TaskEntity, onBinData: OnBinData) {}
 
+    fun scrollRecycler() {}
+
 }
